@@ -1,0 +1,15 @@
+*.dcu
+*.~*
+*.ddp
+*.bak
+*.cfg
+*.dsk
+*.local
+*.identcache
+*.tvsconfig
+*.stat
+__history/
+dcus/
+__recovery/
+Win32/Debug/
+Win32/Release/
