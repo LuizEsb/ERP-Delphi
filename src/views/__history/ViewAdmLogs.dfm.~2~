@@ -1,0 +1,13 @@
+inherited View_AdmLogs: TView_AdmLogs
+  Caption = 'View_AdmLogs'
+  TextHeight = 15
+  inherited pnlLinhaFundo: TPanel
+    inherited CardPanel_Listas: TCardPanel
+      inherited card_pesquisa: TCard
+        inherited pnlTituloPesquisa: TPanel
+          ExplicitTop = 3
+        end
+      end
+    end
+  end
+end

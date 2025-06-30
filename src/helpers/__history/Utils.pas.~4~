@@ -1,0 +1,43 @@
+unit Utils;
+
+interface
+
+uses
+  Windows,
+  SysUtils,
+  ActiveX,
+  ComObj;
+
+function obterMACAddr: string;
+
+implementation
+
+function obterMACAddr: string;
+ var
+  Locator, Services, Enumerator: OleVariant;
+  Obj: OleVariant;
+  i: Integer;
+begin
+  Result := 'MAC-UNKNOWN';
+  try
+    CoInitialize(nil);
+    Locator := CreateOleObject('WbemScripting.SWbemLocator');
+    Services := Locator.ConnectServer('.', 'root\cimv2', '', '');
+    Enumerator := Services.ExecQuery('SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = True');
+
+    for i := 0 to Enumerator.Count - 1 do
+    begin
+      Obj := Enumerator.ItemIndex(i);
+      if not VarIsNull(Obj.MACAddress) then
+      begin
+        Result := Obj.MACAddress;
+        Break;
+      end;
+    end;
+
+    CoUninitialize;
+  except
+    on E: Exception do
+      Result := 'MAC-UNKNOWN';
+  end;
+end;

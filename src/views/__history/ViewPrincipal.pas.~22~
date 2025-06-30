@@ -1,0 +1,178 @@
+unit ViewPrincipal;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  Vcl.ExtCtrls,
+  Vcl.Imaging.jpeg,
+  ViewLogin,
+  System.Actions,
+  Vcl.ActnList,
+  Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.ActnMan,
+  Vcl.ToolWin,
+  Vcl.ActnCtrls,
+  Vcl.ActnMenus,
+  Vcl.Imaging.pngimage,
+  Vcl.Buttons,
+  ViewClientes,
+  ViewLogs, ServiceConexao;
+
+type
+  TView_Principal = class(TForm)
+    pnlPrincipal: TPanel;
+    pnlBackPrincipal: TPanel;
+    pnlRodape: TPanel;
+    pnlLicenciado: TPanel;
+    pnlConteudoLicenca: TPanel;
+    lblLicenciado: TLabel;
+    lblTitLicenciado: TLabel;
+    pnlLineLicenca: TPanel;
+    pnlConteudo: TPanel;
+    pnlMenu: TPanel;
+    pnlSair: TPanel;
+    btnSair: TSpeedButton;
+    pnlShapeMenu: TPanel;
+    ShapeMenu: TShape;
+    pnlDadosMenu: TPanel;
+    btnLogs: TSpeedButton;
+    btnFornecedores: TSpeedButton;
+    btnCaixa: TSpeedButton;
+    btnUsuarios: TSpeedButton;
+    btnProdutos: TSpeedButton;
+    pnlTopo: TPanel;
+    pnlLogo: TPanel;
+    pnlLineLogo: TPanel;
+    pnlConteudoLogo: TPanel;
+    lblTituloEmpresa: TLabel;
+    lblDescricaoEmpresa: TLabel;
+    pnlVersao: TPanel;
+    lblVersaoTitulo: TLabel;
+    lblVersao: TLabel;
+    pnlUsuario: TPanel;
+    pnlLineUsuario: TPanel;
+    pnlImagemUsuario: TPanel;
+    imgUsusarioLaranja: TImage;
+    imgUsuarioBranca: TImage;
+    pnlDadosDoUsuario: TPanel;
+    lblUsuario: TLabel;
+    lblPerfil: TLabel;
+    procedure btnSairClick(Sender: TObject);
+    procedure btnUsuariosClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnCaixaClick(Sender: TObject);
+    procedure btnFornecedoresClick(Sender: TObject);
+    procedure btnProdutosClick(Sender: TObject);
+    procedure btnLogsClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    procedure GET_ShapeMENU(Sender: TObject);
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  View_Principal: TView_Principal;
+  Service_Conexao: TService_Conexao;
+
+implementation
+
+{$R *.dfm}
+
+procedure TView_Principal.btnCaixaClick(Sender: TObject);
+begin
+  GET_ShapeMENU(Sender);
+end;
+
+procedure TView_Principal.btnUsuariosClick(Sender: TObject);
+begin
+  GET_ShapeMENU(Sender);
+  View_Clientes	:= TView_Clientes.Create(Self);
+  try
+    View_Clientes.ShowModal;
+  finally
+    FreeAndNil(View_Clientes);
+  end;
+end;
+
+procedure TView_Principal.btnLogsClick(Sender: TObject);
+begin
+  GET_ShapeMENU(Sender);
+  View_Logs := TView_Logs.Create(Self);
+  try
+    View_Logs.ShowModal;
+  finally
+    FreeAndNil(View_Logs);
+  end;
+end;
+
+procedure TView_Principal.btnFornecedoresClick(Sender: TObject);
+begin
+  GET_ShapeMENU(Sender);
+end;
+
+procedure TView_Principal.btnProdutosClick(Sender: TObject);
+begin
+  GET_ShapeMENU(Sender);
+end;
+
+procedure TView_Principal.btnSairClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TView_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Service_Conexao.Destroy;
+end;
+
+procedure TView_Principal.FormShow(Sender: TObject);
+begin
+  GET_ShapeMENU(btnUsuarios);
+
+  if not Assigned(Service_Conexao) then
+    Service_Conexao := TService_Conexao.Create(Application);
+
+  try
+    if not Assigned(Service_Conexao.connUsuario) then
+    begin
+      ShowMessage('Erro: Componente de conexão não foi criado!');
+      Exit;
+    end;
+
+    if not Service_Conexao.connUsuario.Connected then
+    begin
+      try
+        Service_Conexao.connUsuario.Connected := True;
+      except
+        on E: Exception do
+          ShowMessage('Erro ao conectar: ' + E.Message);
+      end;
+    end;
+
+  except
+    on E: Exception do
+      ShowMessage('Erro crítico: ' + E.Message);
+  end;
+end;
+
+procedure TView_Principal.GET_ShapeMENU(Sender: TObject);
+begin
+  ShapeMenu.Left    := 0;
+  ShapeMenu.Height  := TSpeedButton(Sender).Height;
+  ShapeMenu.Top     := TSpeedButton(Sender).Top;
+  pnlShapeMenu.Repaint;
+end;
+
+end.

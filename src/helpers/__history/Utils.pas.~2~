@@ -1,0 +1,30 @@
+unit Utils;
+
+interface
+
+uses
+  Windows, SysUtils, IdStack, IdStackWindows;
+
+implementation
+  function obterMACAddr: string;
+  var
+  AdapterInfo: array [1..512] of Byte;
+  Size: DWORD;
+  pAdapterInfo: PIP_ADAPTER_INFO;
+  MACAddr: string;
+  I: Integer;
+begin
+  Size := SizeOf(AdapterInfo);
+  if GetAdaptersInfo(@AdapterInfo, Size) = ERROR_SUCCESS then
+  begin
+    pAdapterInfo := @AdapterInfo;
+    MACAddr := '';
+    for I := 0 to pAdapterInfo^.AddressLength - 1 do
+      MACAddr := MACAddr + IntToHex(pAdapterInfo^.Address[I], 2) + '-';
+    Delete(MACAddr, Length(MACAddr), 1); // Remove último hífen
+    Result := MACAddr;
+  end
+  else
+    Result := 'MAC-UNKNOWN';
+end;
+end.

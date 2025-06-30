@@ -1,0 +1,92 @@
+inherited View_AdmLogs: TView_AdmLogs
+  Caption = 'View_AdmLogs'
+  TextHeight = 15
+  inherited pnlLinhaFundo: TPanel
+    inherited CardPanel_Listas: TCardPanel
+      inherited card_pesquisa: TCard
+        inherited DBG_dados: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_USUARIO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_HORA_LOGIN'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUCESSO'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'REGISTRO_MAC_PC'
+              Width = 64
+              Visible = True
+            end>
+        end
+      end
+      inherited card_cadastro: TCard
+        ExplicitLeft = -2
+        ExplicitTop = 6
+        inherited lblCodigo: TLabel
+          Width = 48
+          Caption = 'Log ID'
+          ExplicitWidth = 48
+        end
+        inherited lblStatus: TLabel [1]
+        end
+        inherited lblNome: TLabel [2]
+          Width = 99
+          Caption = 'ID do Usu'#225'rio'
+          ExplicitWidth = 99
+        end
+        inherited Label6: TLabel [3]
+        end
+        inherited lblSenha: TLabel [4]
+          Left = 210
+          Width = 155
+          Caption = 'Data e Hora do Login'
+          ExplicitLeft = 210
+          ExplicitWidth = 155
+        end
+        inherited edtUsuarios_ID: TDBEdit
+          DataField = ''
+          DataSource = nil
+        end
+        inherited edtStatus: TDBEdit [7]
+          DataField = ''
+          DataSource = nil
+        end
+        inherited edtPES_OBSERVACAO: TDBEdit [8]
+          DataSource = nil
+        end
+        inherited edtPES_CNPJCPF: TDBEdit [9]
+          Width = 99
+          DataField = ''
+          DataSource = nil
+          ExplicitWidth = 99
+        end
+        inherited edtSenha: TDBEdit [10]
+          Left = 210
+          DataField = ''
+          DataSource = nil
+          ExplicitLeft = 210
+        end
+      end
+    end
+  end
+  inherited dsDados: TDataSource
+    DataSet = Service_Conexao.qryLogLogin
+  end
+end

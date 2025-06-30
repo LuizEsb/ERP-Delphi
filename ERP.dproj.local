@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/04/10 16:54:14.000.791,=C:\Users\User\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/23 13:39:55.000.634,=C:\Users\User\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/04/30 13:38:14.000.971,=C:\Users\User\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/06/09 11:43:31.000.631,=C:\Users\User\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/06/09 11:45:48.000.212,C:\Users\User\Desktop\projetoDelphi\ViewPrincipal.dfm=C:\Users\User\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2025/06/09 11:45:48.000.212,C:\Users\User\Desktop\projetoDelphi\ViewPrincipal.pas=C:\Users\User\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/06/09 11:46:03.000.948,C:\Users\User\Desktop\projetoDelphi\Project1.dproj=C:\Users\User\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2025/06/09 11:50:33.000.022,=C:\Users\User\Desktop\projetoDelphi\Unit2.pas</Transaction>
+    <Transaction>2025/06/09 11:50:50.000.117,C:\Users\User\Desktop\projetoDelphi\ViewLogin.pas=C:\Users\User\Desktop\projetoDelphi\Unit2.pas</Transaction>
+    <Transaction>2025/06/09 11:50:50.000.117,C:\Users\User\Desktop\projetoDelphi\ViewLogin.dfm=C:\Users\User\Desktop\projetoDelphi\Unit2.dfm</Transaction>
+    <Transaction>2025/06/09 11:54:08.000.425,C:\Users\User\Desktop\projetoDelphi\ViewLogin.pas=</Transaction>
+    <Transaction>2025/06/09 11:54:17.000.103,=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/09 11:55:14.000.046,C:\Users\User\Desktop\projetoDelphi\ViewLogin.dfm=C:\Users\User\Desktop\projetoDelphi\Unit1.dfm</Transaction>
+    <Transaction>2025/06/09 11:55:14.000.046,C:\Users\User\Desktop\projetoDelphi\ViewLogin.pas=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/09 12:14:36.000.854,C:\Users\User\Desktop\projetoDelphi\Project1.dproj=C:\Users\User\Desktop\projetoDelphi\ERP.dproj</Transaction>
+    <Transaction>2025/06/09 12:16:47.000.743,C:\Users\User\Desktop\projetoDelphi\views\ViewLogin.pas=C:\Users\User\Desktop\projetoDelphi\ViewLogin.pas</Transaction>
+    <Transaction>2025/06/09 12:16:47.000.743,C:\Users\User\Desktop\projetoDelphi\views\ViewLogin.dfm=C:\Users\User\Desktop\projetoDelphi\ViewLogin.dfm</Transaction>
+    <Transaction>2025/06/09 12:17:10.000.903,C:\Users\User\Desktop\projetoDelphi\views\ViewPrincipal.dfm=C:\Users\User\Desktop\projetoDelphi\ViewPrincipal.dfm</Transaction>
+    <Transaction>2025/06/09 12:17:10.000.903,C:\Users\User\Desktop\projetoDelphi\views\ViewPrincipal.pas=C:\Users\User\Desktop\projetoDelphi\ViewPrincipal.pas</Transaction>
+    <Transaction>2025/06/11 08:45:36.000.969,C:\Users\User\Desktop\projetoDelphi\views\ViewLogin.dfm=C:\Users\User\Desktop\projetoDelphi\src\views\ViewLogin.dfm</Transaction>
+    <Transaction>2025/06/11 08:45:36.000.969,C:\Users\User\Desktop\projetoDelphi\views\ViewLogin.pas=C:\Users\User\Desktop\projetoDelphi\src\views\ViewLogin.pas</Transaction>
+    <Transaction>2025/06/11 08:45:56.000.539,C:\Users\User\Desktop\projetoDelphi\views\ViewPrincipal.dfm=C:\Users\User\Desktop\projetoDelphi\src\views\ViewPrincipal.dfm</Transaction>
+    <Transaction>2025/06/11 08:45:56.000.539,C:\Users\User\Desktop\projetoDelphi\views\ViewPrincipal.pas=C:\Users\User\Desktop\projetoDelphi\src\views\ViewPrincipal.pas</Transaction>
+    <Transaction>2025/06/11 10:20:26.000.364,=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/11 10:21:20.000.057,C:\Users\User\Desktop\projetoDelphi\Unit1.pas=C:\Users\User\Desktop\projetoDelphi\src\services\ServiceConexao.pas</Transaction>
+    <Transaction>2025/06/11 10:21:20.000.057,C:\Users\User\Desktop\projetoDelphi\Unit1.dfm=C:\Users\User\Desktop\projetoDelphi\src\services\ServiceConexao.dfm</Transaction>
+    <Transaction>2025/06/11 14:04:56.000.247,=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/11 14:05:44.000.111,C:\Users\User\Desktop\projetoDelphi\src\helpers\CriptografiaHelper.pas=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/17 14:30:09.000.392,=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/17 14:32:40.000.351,C:\Users\User\Desktop\projetoDelphi\src\views\ViewClientes.dfm=C:\Users\User\Desktop\projetoDelphi\Unit1.dfm</Transaction>
+    <Transaction>2025/06/17 14:32:40.000.351,C:\Users\User\Desktop\projetoDelphi\src\views\ViewClientes.pas=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/23 09:21:56.000.418,=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/23 09:22:18.000.408,C:\Users\User\Desktop\projetoDelphi\src\helpers\Utils.pas=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/23 13:49:33.000.184,=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/23 13:49:53.000.733,C:\Users\User\Desktop\projetoDelphi\src\views\ViewAdmLogs.pas=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/23 13:49:53.000.733,C:\Users\User\Desktop\projetoDelphi\src\views\ViewAdmLogs.dfm=C:\Users\User\Desktop\projetoDelphi\Unit1.dfm</Transaction>
+    <Transaction>2025/06/23 14:51:24.000.610,=C:\Users\User\Desktop\projetoDelphi\Unit1.pas</Transaction>
+    <Transaction>2025/06/23 14:51:38.000.280,C:\Users\User\Desktop\projetoDelphi\Unit1.pas=C:\Users\User\Desktop\projetoDelphi\src\views\ViewLogs.pas</Transaction>
+    <Transaction>2025/06/23 14:51:38.000.280,C:\Users\User\Desktop\projetoDelphi\Unit1.dfm=C:\Users\User\Desktop\projetoDelphi\src\views\ViewLogs.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="src"/>
+    <File Path="src\helpers"/>
+    <File Path="src\helpers\CriptografiaHelper.pas"/>
+    <File Path="src\helpers\Utils.pas"/>
+    <File Path="src\services"/>
+    <File Path="src\services\ServiceConexao.pas"/>
+    <File Path="src\services\ServiceConexao.dfm"/>
+    <File Path="src\views"/>
+    <File Path="src\views\ViewLogin.pas"/>
+    <File Path="src\views\ViewLogin.dfm"/>
+    <File Path="src\views\ViewPrincipal.pas"/>
+    <File Path="src\views\ViewPrincipal.dfm"/>
+    <File Path="src\views\ViewClientes.pas"/>
+    <File Path="src\views\ViewClientes.dfm"/>
+    <File Path="src\views\ViewLogs.pas"/>
+    <File Path="src\views\ViewLogs.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

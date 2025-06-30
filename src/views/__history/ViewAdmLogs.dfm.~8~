@@ -1,0 +1,92 @@
+inherited View_AdmLogs: TView_AdmLogs
+  Caption = 'View_AdmLogs'
+  TextHeight = 15
+  inherited pnlLinhaFundo: TPanel
+    inherited CardPanel_Listas: TCardPanel
+      ActiveCard = card_pesquisa
+      inherited card_pesquisa: TCard
+        inherited DBG_dados: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_USUARIO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_HORA_LOGIN'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUCESSO'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'REGISTRO_MAC_PC'
+              Width = 64
+              Visible = True
+            end>
+        end
+      end
+      inherited card_cadastro: TCard
+        ExplicitLeft = -2
+        ExplicitTop = 6
+        inherited lblCodigo: TLabel
+          Width = 48
+          Caption = 'Log ID'
+          ExplicitWidth = 48
+        end
+        inherited Label3: TLabel [1]
+        end
+        inherited lblStatus: TLabel [2]
+        end
+        inherited lblNome: TLabel [3]
+          Width = 99
+          Caption = 'ID do Usu'#225'rio'
+          ExplicitWidth = 99
+        end
+        inherited Label6: TLabel [4]
+        end
+        inherited lblSenha: TLabel [5]
+          Left = 210
+          Width = 155
+          Caption = 'Data e Hora do Login'
+          ExplicitLeft = 210
+          ExplicitWidth = 155
+        end
+        inherited edtUsuarios_ID: TDBEdit
+          DataField = 'ID_USUARIO'
+        end
+        inherited edtPES_FANTASIA: TDBEdit [8]
+        end
+        inherited edtStatus: TDBEdit [9]
+          DataField = 'DATA_HORA_LOGIN'
+        end
+        inherited edtPES_OBSERVACAO: TDBEdit [10]
+        end
+        inherited edtPES_CNPJCPF: TDBEdit [11]
+          Width = 99
+          DataField = 'REGISTRO_MAC_PC'
+          ExplicitWidth = 99
+        end
+        inherited edtSenha: TDBEdit [12]
+          Left = 210
+          DataField = 'ID'
+          ExplicitLeft = 210
+        end
+      end
+    end
+  end
+  inherited dsDados: TDataSource
+    DataSet = Service_Conexao.qryLogLogin
+  end
+end

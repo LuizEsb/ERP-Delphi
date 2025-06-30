@@ -1,0 +1,16 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  ViewPrincipal in 'ViewPrincipal.pas' {View_Principal},
+  ViewLogin in 'ViewLogin.pas' {View_Login};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TView_Principal, View_Principal);
+  Application.CreateForm(TView_Login, View_Login);
+  Application.Run;
+end.

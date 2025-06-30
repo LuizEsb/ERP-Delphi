@@ -1,0 +1,182 @@
+unit ViewClientes;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Data.DB,
+  Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls,
+  Vcl.Buttons,
+  Vcl.Mask,
+  Vcl.ComCtrls,
+  Vcl.DBCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.WinXCtrls,
+  Vcl.WinXPanels,
+  ServiceConexao,
+  CriptografiaHelper;
+
+type
+  TView_Clientes = class(TForm)
+    pnlLinhaFundo: TPanel;
+    CardPanel_Listas: TCardPanel;
+    card_pesquisa: TCard;
+    pnlTituloPesquisa: TPanel;
+    lblTituloPesquisa: TLabel;
+    edtPesquisa: TSearchBox;
+    card_cadastro: TCard;
+    lblCodigo: TLabel;
+    lblSenha: TLabel;
+    lblStatus: TLabel;
+    lblNome: TLabel;
+    pnlTituloCadCliente: TPanel;
+    lblTituloCadastro: TLabel;
+    pnlRodape: TPanel;
+    spdbtnExcluir: TSpeedButton;
+    spdbtnNovo: TSpeedButton;
+    spdbtnEditar: TSpeedButton;
+    spdbtnCancelar: TSpeedButton;
+    spdbtnSalvar: TSpeedButton;
+    pnlTopo: TPanel;
+    lblTitulo: TLabel;
+    pnlIcone: TPanel;
+    Image1: TImage;
+    pnlFechar: TPanel;
+    btnSair: TSpeedButton;
+    dsDados: TDataSource;
+    dbgDados: TDBGrid;
+    edtSenha: TDBEdit;
+    edtLogin: TDBEdit;
+    edtID: TDBEdit;
+    edtStatus: TDBComboBox;
+    procedure btnSairClick(Sender: TObject);
+    procedure pnlTopoMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormShow(Sender: TObject);
+    procedure spdbtnNovoClick(Sender: TObject);
+    procedure spdbtnEditarClick(Sender: TObject);
+    procedure spdbtnCancelarClick(Sender: TObject);
+    procedure spdbtnSalvarClick(Sender: TObject);
+    procedure spdbtnExcluirClick(Sender: TObject);
+    procedure CardPanel_ListasCardChange(Sender: TObject; PrevCard,
+      NextCard: TCard);
+    procedure FormCreate(Sender: TObject);
+  private
+
+  public
+    { Public declarations }
+  end;
+
+var
+  View_Clientes: TView_Clientes;
+  Service_Conexao: TService_Conexao;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TView_Clientes.btnSairClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure TView_Clientes.CardPanel_ListasCardChange(Sender: TObject; PrevCard,
+  NextCard: TCard);
+begin
+  if CardPanel_Listas.ActiveCard = card_cadastro then
+    SelectFirst;
+end;
+
+procedure TView_Clientes.FormCreate(Sender: TObject);
+begin
+  BorderStyle := bsNone;
+  Align := alClient;
+  ParentBackground := False;
+end;
+
+procedure TView_Clientes.FormShow(Sender: TObject);
+begin  //show
+   CardPanel_Listas.ActiveCard := card_pesquisa;
+
+   Service_Conexao.qryUsuarios.DisableControls;
+   try
+     Service_Conexao.qryUsuarios.Close;
+     Service_Conexao.qryUsuarios.SQL.Text := 'SELECT * FROM usuarios ORDER BY id DESC';
+     Service_Conexao.qryUsuarios.Open;
+   finally
+     Service_Conexao.qryUsuarios.EnableControls;
+   end;
+end;
+
+procedure TView_Clientes.pnlTopoMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+  const
+    sc_DragMove = $f012;
+  begin
+  ReleaseCapture;
+  Perform(wm_SysCommand, sc_DragMove, 0);
+end;
+
+procedure TView_Clientes.spdbtnCancelarClick(Sender: TObject);
+begin  //Cancelar
+  if Service_Conexao.qryUsuarios.State in dsEditModes then
+  Service_Conexao.qryUsuarios.Cancel;
+  CardPanel_Listas.ActiveCard := card_pesquisa;
+end;
+
+procedure TView_Clientes.spdbtnEditarClick(Sender: TObject);
+begin  //Editar
+  CardPanel_Listas.ActiveCard := card_cadastro;
+  Service_Conexao.qryUsuarios.Edit;
+  edtSenha.Text := '';
+end;
+
+procedure TView_Clientes.spdbtnExcluirClick(Sender: TObject);
+begin  //Excluir
+  if not Service_Conexao.qryUsuarios.IsEmpty then
+  begin
+    if MessageDlg('Deseja realmente excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      Service_Conexao.qryUsuarios.Delete;
+      ShowMessage('Cliente excluído com sucesso!');
+      CardPanel_Listas.ActiveCard := card_pesquisa;
+    end;
+  end
+  else
+  ShowMessage('Nenhum registro selecionado para exclusão.');
+end;
+
+procedure TView_Clientes.spdbtnNovoClick(Sender: TObject);
+begin  //Novo
+  if dsDados.DataSet.State in dsEditModes then
+  Service_Conexao.qryUsuarios.Cancel;
+  CardPanel_Listas.ActiveCard := card_cadastro;
+  Service_Conexao.qryUsuarios.Insert;
+  if dsDados.DataSet.State in [dsInsert] then
+  edtID.Text := '';
+end;
+
+procedure TView_Clientes.spdbtnSalvarClick(Sender: TObject);
+begin  //Salvar
+  if dsDados.DataSet.State in dsEditModes then
+  begin
+    Service_Conexao.qryUsuariosSENHA.AsString := TCriptografiaHelper.gerarHashSHA256(edtSenha.Text);
+    Service_Conexao.qryUsuarios.Post;
+    CardPanel_Listas.ActiveCard := card_pesquisa;
+    ShowMessage('Dados salvos com sucesso!');
+  end;
+end;
+
+end.

@@ -1,0 +1,51 @@
+unit ViewAdmLogs;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  ViewClientes,
+  Data.DB,
+  Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls,
+  Vcl.Buttons,
+  Vcl.Mask,
+  Vcl.DBCtrls,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.WinXCtrls,
+  Vcl.WinXPanels,
+  ServiceConexao;
+
+type
+  TView_AdmLogs = class(TView_Clientes)
+    procedure btnSairClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  View_AdmLogs: TView_AdmLogs;
+
+implementation
+
+{$R *.dfm}
+
+procedure TView_AdmLogs.btnSairClick(Sender: TObject);
+begin
+  inherited;
+  Self.Close;
+end;
+
+end.

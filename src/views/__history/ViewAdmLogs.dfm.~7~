@@ -1,0 +1,58 @@
+inherited View_AdmLogs: TView_AdmLogs
+  Caption = 'View_AdmLogs'
+  TextHeight = 15
+  inherited pnlLinhaFundo: TPanel
+    inherited CardPanel_Listas: TCardPanel
+      inherited card_pesquisa: TCard
+        inherited DBG_dados: TDBGrid
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_USUARIO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DATA_HORA_LOGIN'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUCESSO'
+              Width = 64
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'REGISTRO_MAC_PC'
+              Width = 64
+              Visible = True
+            end>
+        end
+      end
+      inherited card_cadastro: TCard
+        inherited edtPES_RAZAO: TDBEdit
+          DataField = 'DATA_HORA_LOGIN'
+        end
+        inherited edtPES_TELEFONE: TDBEdit
+          DataField = 'DATA_HORA_LOGIN'
+        end
+        inherited edtPES_OBSERVACAO: TDBEdit
+          DataField = ''
+        end
+        inherited edtPES_CNPJCPF: TDBEdit
+          DataField = ''
+        end
+      end
+    end
+  end
+  inherited dsDados: TDataSource
+    DataSet = Service_Conexao.qryLogLogin
+  end
+end

@@ -1,0 +1,81 @@
+unit ViewLogs;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Data.DB,
+  Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls,
+  Vcl.Buttons,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.StdCtrls,
+  Vcl.WinXCtrls,
+  Vcl.WinXPanels,
+  ServiceConexao;
+
+type
+  TView_Logs = class(TForm)
+    dsDados: TDataSource;
+    pnlLinhaFundo: TPanel;
+    CardPanel_Listas: TCardPanel;
+    card_pesquisa: TCard;
+    pnlTituloPesquisa: TPanel;
+    lblTituloPesquisa: TLabel;
+    edtPesquisa: TSearchBox;
+    DBG_dados: TDBGrid;
+    pnlRodape: TPanel;
+    pnlTopo: TPanel;
+    lblTitulo: TLabel;
+    pnlIcone: TPanel;
+    Image1: TImage;
+    pnlFechar: TPanel;
+    btnSair: TSpeedButton;
+    procedure btnSairClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  View_Logs: TView_Logs;
+
+implementation
+
+{$R *.dfm}
+
+procedure TView_Logs.btnSairClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure TView_Logs.FormCreate(Sender: TObject);
+begin
+  BorderStyle := bsNone;
+  Align := alClient;
+  ParentBackground := False;
+end;
+
+procedure TView_Logs.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = VK_Escape then
+  Self.Close;
+
+  if key = VK_RETURN then
+    perform(WM_NEXTDLGCTL,0,0);
+end;
+
+end.
