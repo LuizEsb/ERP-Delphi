@@ -1467,7 +1467,7 @@ object View_Principal: TView_Principal
   end
   object tmrSessao: TTimer
     Enabled = False
-    Interval = 2000
+    Interval = 60000
     OnTimer = tmrSessaoTimer
     Left = 368
     Top = 16

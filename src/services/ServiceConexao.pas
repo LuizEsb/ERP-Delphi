@@ -42,6 +42,11 @@ type
     qryUsuariosSENHA: TStringField;
     qryUsuariosID: TFDAutoIncField;
     qryUsuariosULTIMO_LOG: TSQLTimeStampField;
+    qryLogLoginID: TIntegerField;
+    qryLogLoginID_USUARIO: TIntegerField;
+    qryLogLoginDATA_HORA_LOGIN: TSQLTimeStampField;
+    qryLogLoginSUCESSO: TStringField;
+    qryLogLoginREGISTRO_MAC_PC: TStringField;
   private
     { Private declarations }
   public

@@ -171,7 +171,7 @@ begin
     except
       on E: exception do
       raise Exception.CreateFmt('Erro ao pesquisar: %s (SQL: %s)', [E.Message, Service_Conexao.qryUsuarios.SQL.Text]);
-    end;
+  end;
 end;
 
 procedure TView_Clientes.pesquisarPorLogin(aPesquisa: string);

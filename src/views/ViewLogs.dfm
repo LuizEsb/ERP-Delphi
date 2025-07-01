@@ -3,8 +3,8 @@ object View_Logs: TView_Logs
   Top = 0
   BorderStyle = bsNone
   Caption = 'View_Logs'
-  ClientHeight = 480
-  ClientWidth = 640
+  ClientHeight = 674
+  ClientWidth = 1240
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,19 +18,21 @@ object View_Logs: TView_Logs
   object pnlLinhaFundo: TPanel
     Left = 0
     Top = 35
-    Width = 640
-    Height = 437
+    Width = 1240
+    Height = 631
     Align = alClient
     BevelOuter = bvNone
     Color = 8750469
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 640
+    ExplicitHeight = 437
     object CardPanel_Listas: TCardPanel
       AlignWithMargins = True
       Left = 1
       Top = 0
-      Width = 638
-      Height = 437
+      Width = 1238
+      Height = 631
       Margins.Left = 1
       Margins.Top = 0
       Margins.Right = 1
@@ -41,24 +43,29 @@ object View_Logs: TView_Logs
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 638
+      ExplicitHeight = 437
       object card_pesquisa: TCard
         Left = 0
         Top = 0
-        Width = 638
-        Height = 437
+        Width = 1238
+        Height = 631
         Caption = 'Card1'
         CardIndex = 0
         TabOrder = 0
+        ExplicitWidth = 638
+        ExplicitHeight = 437
         object pnlTituloPesquisa: TPanel
           Left = 0
           Top = 0
-          Width = 638
+          Width = 1238
           Height = 100
           Align = alTop
           BevelOuter = bvNone
           Color = 13224649
           ParentBackground = False
           TabOrder = 0
+          ExplicitTop = -3
           object lblTituloPesquisa: TLabel
             Left = 29
             Top = 14
@@ -70,6 +77,21 @@ object View_Logs: TView_Logs
             Font.Color = clWindowText
             Font.Height = -21
             Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+          end
+          object lblFiltro: TLabel
+            Left = 867
+            Top = 54
+            Width = 61
+            Height = 17
+            Caption = 'Filtrar por:'
+            Color = 13355722
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI'
             Font.Style = []
             ParentColor = False
             ParentFont = False
@@ -90,14 +112,26 @@ object View_Logs: TView_Logs
             CanUndoSelText = True
             TabOrder = 0
             TextHint = 'Digite aqui a sua pesquisa'
+            OnKeyDown = edtPesquisaKeyDown
+          end
+          object cbxFiltro: TComboBox
+            Left = 942
+            Top = 54
+            Width = 106
+            Height = 23
+            TabOrder = 1
+            Text = 'ID'
+            Items.Strings = (
+              'ID'
+              'ID_USUARIO')
           end
         end
         object DBG_dados: TDBGrid
           AlignWithMargins = True
           Left = 5
           Top = 105
-          Width = 628
-          Height = 327
+          Width = 1228
+          Height = 521
           Cursor = crHandPoint
           Margins.Left = 5
           Margins.Top = 5
@@ -145,30 +179,33 @@ object View_Logs: TView_Logs
   end
   object pnlRodape: TPanel
     Left = 0
-    Top = 472
-    Width = 640
+    Top = 666
+    Width = 1240
     Height = 8
     Align = alBottom
     BevelOuter = bvNone
     Color = 8750469
     ParentBackground = False
     TabOrder = 1
+    ExplicitTop = 472
+    ExplicitWidth = 640
   end
   object pnlTopo: TPanel
     Left = 0
     Top = 0
-    Width = 640
+    Width = 1240
     Height = 35
     Align = alTop
     BevelOuter = bvNone
     Color = 5395026
     ParentBackground = False
     TabOrder = 2
+    ExplicitWidth = 640
     object lblTitulo: TLabel
       AlignWithMargins = True
       Left = 38
       Top = 3
-      Width = 518
+      Width = 1118
       Height = 29
       Cursor = crHandPoint
       Align = alClient
@@ -236,13 +273,14 @@ object View_Logs: TView_Logs
       end
     end
     object pnlFechar: TPanel
-      Left = 559
+      Left = 1159
       Top = 0
       Width = 81
       Height = 35
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
+      ExplicitLeft = 559
       object btnSair: TSpeedButton
         AlignWithMargins = True
         Left = 3

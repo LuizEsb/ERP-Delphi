@@ -31,6 +31,30 @@ object Service_Conexao: TService_Conexao
       'order by id desc')
     Left = 24
     Top = 128
+    object qryLogLoginID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryLogLoginID_USUARIO: TIntegerField
+      FieldName = 'ID_USUARIO'
+      Origin = 'ID_USUARIO'
+      Required = True
+    end
+    object qryLogLoginDATA_HORA_LOGIN: TSQLTimeStampField
+      FieldName = 'DATA_HORA_LOGIN'
+      Origin = 'DATA_HORA_LOGIN'
+    end
+    object qryLogLoginSUCESSO: TStringField
+      FieldName = 'SUCESSO'
+      Origin = 'SUCESSO'
+      Size = 3
+    end
+    object qryLogLoginREGISTRO_MAC_PC: TStringField
+      FieldName = 'REGISTRO_MAC_PC'
+      Origin = 'REGISTRO_MAC_PC'
+    end
   end
   object WaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
