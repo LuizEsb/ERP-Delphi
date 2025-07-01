@@ -14,7 +14,11 @@ object View_Principal: TView_Principal
   Font.Style = []
   ParentBiDiMode = False
   Visible = True
-  OnClose = FormClose
+  OnActivate = FormActivate
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  OnMouseMove = FormMouseMove
   OnShow = FormShow
   TextHeight = 15
   object pnlPrincipal: TPanel
@@ -1460,5 +1464,12 @@ object View_Principal: TView_Principal
         end
       end
     end
+  end
+  object tmrSessao: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = tmrSessaoTimer
+    Left = 368
+    Top = 16
   end
 end

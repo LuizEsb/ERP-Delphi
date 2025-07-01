@@ -10,8 +10,8 @@ object View_Login: TView_Login
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object pnlPrincipal: TPanel
     Left = 0
@@ -372,6 +372,7 @@ object View_Login: TView_Login
         Height = 23
         Cursor = crIBeam
         TabOrder = 0
+        OnKeyDown = edtUserKeyDown
       end
       object edtSenha: TEdit
         Left = 216
@@ -380,6 +381,7 @@ object View_Login: TView_Login
         Height = 23
         Cursor = crIBeam
         TabOrder = 1
+        OnKeyDown = edtSenhaKeyDown
       end
       object btnEntrar: TButton
         Left = 240

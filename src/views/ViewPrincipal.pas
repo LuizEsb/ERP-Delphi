@@ -15,7 +15,6 @@ uses
   Vcl.StdCtrls,
   Vcl.ExtCtrls,
   Vcl.Imaging.jpeg,
-  ViewLogin,
   System.Actions,
   Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls,
@@ -67,6 +66,7 @@ type
     pnlDadosDoUsuario: TPanel;
     lblUsuario: TLabel;
     lblPerfil: TLabel;
+    tmrSessao: TTimer;
     procedure btnSairClick(Sender: TObject);
     procedure btnUsuariosClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -74,7 +74,12 @@ type
     procedure btnFornecedoresClick(Sender: TObject);
     procedure btnProdutosClick(Sender: TObject);
     procedure btnLogsClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure tmrSessaoTimer(Sender: TObject);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormActivate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
 
   private
     procedure GET_ShapeMENU(Sender: TObject);
@@ -88,8 +93,12 @@ type
 var
   View_Principal: TView_Principal;
   Service_Conexao: TService_Conexao;
+  TempoInativo: integer;
+  TempoLimite: integer;
 
 implementation
+uses
+  ViewLogin;
 
 {$R *.dfm}
 
@@ -155,13 +164,36 @@ begin
     end;
 end;
 
-procedure TView_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TView_Principal.FormActivate(Sender: TObject);
 begin
-  Service_Conexao.Destroy;
+  TempoInativo := 0;
+end;
+
+procedure TView_Principal.FormCreate(Sender: TObject);
+begin
+  tmrSessao.Enabled := True;
+end;
+
+procedure TView_Principal.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(Service_Conexao);
+end;
+
+procedure TView_Principal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  TempoInativo := 0;
+end;
+
+procedure TView_Principal.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
+  Y: Integer);
+begin
+  TempoInativo := 0;
 end;
 
 procedure TView_Principal.FormShow(Sender: TObject);
 begin  //show
+  TempoLimite := 5;
   GET_ShapeMENU(btnUsuarios);
 
   if not Assigned(Service_Conexao) then
@@ -196,6 +228,18 @@ begin
   ShapeMenu.Height  := TSpeedButton(Sender).Height;
   ShapeMenu.Top     := TSpeedButton(Sender).Top;
   pnlShapeMenu.Repaint;
+end;
+
+procedure TView_Principal.tmrSessaoTimer(Sender: TObject);
+begin
+  Inc(TempoInativo);
+
+  if TempoInativo >= TempoLimite then
+  begin
+    View_Principal.tmrSessao.Enabled := False;
+    ShowMessage('Sessão expirada por inatividade.');
+    Application.Terminate;
+  end;
 end;
 
 end.

@@ -5,8 +5,8 @@ object View_Clientes: TView_Clientes
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Form1'
-  ClientHeight = 559
-  ClientWidth = 837
+  ClientHeight = 682
+  ClientWidth = 1359
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,8 +19,8 @@ object View_Clientes: TView_Clientes
   object pnlLinhaFundo: TPanel
     Left = 0
     Top = 35
-    Width = 837
-    Height = 484
+    Width = 1359
+    Height = 607
     Align = alClient
     BevelOuter = bvNone
     Color = 8750469
@@ -30,8 +30,8 @@ object View_Clientes: TView_Clientes
       AlignWithMargins = True
       Left = 1
       Top = 0
-      Width = 835
-      Height = 484
+      Width = 1357
+      Height = 607
       Margins.Left = 1
       Margins.Top = 0
       Margins.Right = 1
@@ -46,15 +46,15 @@ object View_Clientes: TView_Clientes
       object card_pesquisa: TCard
         Left = 0
         Top = 0
-        Width = 835
-        Height = 484
+        Width = 1357
+        Height = 607
         Caption = 'Card1'
         CardIndex = 0
         TabOrder = 0
         object pnlTituloPesquisa: TPanel
           Left = 0
           Top = 0
-          Width = 835
+          Width = 1357
           Height = 100
           Align = alTop
           BevelOuter = bvNone
@@ -76,6 +76,21 @@ object View_Clientes: TView_Clientes
             ParentColor = False
             ParentFont = False
           end
+          object lblFiltro: TLabel
+            Left = 857
+            Top = 53
+            Width = 61
+            Height = 17
+            Caption = 'Filtrar por:'
+            Color = 13355722
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentColor = False
+            ParentFont = False
+          end
           object edtPesquisa: TSearchBox
             Left = 29
             Top = 50
@@ -92,14 +107,26 @@ object View_Clientes: TView_Clientes
             CanUndoSelText = True
             TabOrder = 0
             TextHint = 'Digite aqui a sua pesquisa'
+            OnKeyDown = edtPesquisaKeyDown
+          end
+          object cbxFiltro: TComboBox
+            Left = 925
+            Top = 53
+            Width = 106
+            Height = 23
+            TabOrder = 1
+            Text = 'LOGIN'
+            Items.Strings = (
+              'ID'
+              'LOGIN')
           end
         end
         object dbgDados: TDBGrid
           AlignWithMargins = True
           Left = 3
           Top = 103
-          Width = 829
-          Height = 378
+          Width = 1351
+          Height = 501
           Align = alClient
           DataSource = dsDados
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -144,8 +171,8 @@ object View_Clientes: TView_Clientes
       object card_cadastro: TCard
         Left = 0
         Top = 0
-        Width = 835
-        Height = 484
+        Width = 1357
+        Height = 607
         Caption = 'Card1'
         CardIndex = 1
         ParentShowHint = False
@@ -206,7 +233,7 @@ object View_Clientes: TView_Clientes
         object pnlTituloCadCliente: TPanel
           Left = 0
           Top = 0
-          Width = 835
+          Width = 1357
           Height = 75
           Align = alTop
           BevelOuter = bvNone
@@ -274,8 +301,8 @@ object View_Clientes: TView_Clientes
   end
   object pnlRodape: TPanel
     Left = 0
-    Top = 519
-    Width = 837
+    Top = 642
+    Width = 1359
     Height = 40
     Align = alBottom
     BevelOuter = bvNone
@@ -284,7 +311,7 @@ object View_Clientes: TView_Clientes
     TabOrder = 1
     object spdbtnExcluir: TSpeedButton
       AlignWithMargins = True
-      Left = 769
+      Left = 1291
       Top = 3
       Width = 65
       Height = 34
@@ -305,7 +332,7 @@ object View_Clientes: TView_Clientes
     end
     object spdbtnNovo: TSpeedButton
       AlignWithMargins = True
-      Left = 485
+      Left = 1007
       Top = 3
       Width = 65
       Height = 34
@@ -326,7 +353,7 @@ object View_Clientes: TView_Clientes
     end
     object spdbtnEditar: TSpeedButton
       AlignWithMargins = True
-      Left = 556
+      Left = 1078
       Top = 3
       Width = 65
       Height = 34
@@ -348,7 +375,7 @@ object View_Clientes: TView_Clientes
     end
     object spdbtnCancelar: TSpeedButton
       AlignWithMargins = True
-      Left = 627
+      Left = 1149
       Top = 3
       Width = 65
       Height = 34
@@ -370,7 +397,7 @@ object View_Clientes: TView_Clientes
     end
     object spdbtnSalvar: TSpeedButton
       AlignWithMargins = True
-      Left = 698
+      Left = 1220
       Top = 3
       Width = 65
       Height = 34
@@ -394,7 +421,7 @@ object View_Clientes: TView_Clientes
   object pnlTopo: TPanel
     Left = 0
     Top = 0
-    Width = 837
+    Width = 1359
     Height = 35
     Align = alTop
     BevelOuter = bvNone
@@ -405,7 +432,7 @@ object View_Clientes: TView_Clientes
       AlignWithMargins = True
       Left = 38
       Top = 3
-      Width = 715
+      Width = 1237
       Height = 29
       Cursor = crHandPoint
       Align = alClient
@@ -473,7 +500,7 @@ object View_Clientes: TView_Clientes
       end
     end
     object pnlFechar: TPanel
-      Left = 756
+      Left = 1278
       Top = 0
       Width = 81
       Height = 35

@@ -60,6 +60,8 @@ type
     edtLogin: TDBEdit;
     edtID: TDBEdit;
     edtStatus: TDBComboBox;
+    cbxFiltro: TComboBox;
+    lblFiltro: TLabel;
     procedure btnSairClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure spdbtnNovoClick(Sender: TObject);
@@ -68,10 +70,16 @@ type
     procedure spdbtnSalvarClick(Sender: TObject);
     procedure spdbtnExcluirClick(Sender: TObject);
     procedure CardPanel_ListasCardChange(Sender: TObject; PrevCard,
-      NextCard: TCard);
+  NextCard: TCard);
     procedure FormCreate(Sender: TObject);
+    procedure edtPesquisaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
-
+    function validarPesquisa(aPesquisa: string) : boolean;
+    procedure pesquisarDados(aPesquisa: string);
+    procedure pesquisarPorID(aPesquisa: string);
+    procedure pesquisarPorLogin(aPesquisa: string);
+    procedure pesquisaDefault;
   public
     { Public declarations }
   end;
@@ -100,6 +108,15 @@ begin
     SelectFirst;
 end;
 
+procedure TView_Clientes.edtPesquisaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_RETURN then
+  begin
+    pesquisarDados(Trim(edtPesquisa.Text));
+  end;
+end;
+
 procedure TView_Clientes.FormCreate(Sender: TObject);
 begin
   BorderStyle := bsNone;
@@ -110,8 +127,12 @@ end;
 procedure TView_Clientes.FormShow(Sender: TObject);
 begin  //show
    CardPanel_Listas.ActiveCard := card_pesquisa;
+   pesquisaDefault;
+end;
 
-   Service_Conexao.qryUsuarios.DisableControls;
+procedure TView_Clientes.pesquisaDefault;
+begin
+  Service_Conexao.qryUsuarios.DisableControls;
    try
      Service_Conexao.qryUsuarios.Close;
      Service_Conexao.qryUsuarios.SQL.Text := 'SELECT * FROM usuarios ORDER BY id DESC';
@@ -119,6 +140,59 @@ begin  //show
    finally
      Service_Conexao.qryUsuarios.EnableControls;
    end;
+end;
+
+procedure TView_Clientes.pesquisarDados(aPesquisa: string);
+begin
+  if validarPesquisa(aPesquisa) then
+  begin
+    if cbxFiltro.Text = 'ID' then
+      pesquisarPorID(aPesquisa)
+    else
+      pesquisarPorLogin(aPesquisa)
+  end;
+end;
+
+procedure TView_Clientes.pesquisarPorID(aPesquisa: string);
+begin
+  try
+    begin
+      Service_Conexao.qryUsuarios.DisableControls;
+
+      Service_Conexao.qryUsuarios.Close;
+      Service_Conexao.qryUsuarios.SQL.Clear;
+
+      Service_Conexao.qryUsuarios.SQL.Text := 'select * from USUARIOS where ID like :pesquisa';
+      Service_Conexao.qryUsuarios.ParamByName('pesquisa').AsInteger := StrToInt(aPesquisa);
+
+      Service_Conexao.qryUsuarios.Open;
+      Service_Conexao.qryUsuarios.EnableControls;
+    end;
+    except
+      on E: exception do
+      raise Exception.CreateFmt('Erro ao pesquisar: %s (SQL: %s)', [E.Message, Service_Conexao.qryUsuarios.SQL.Text]);
+    end;
+end;
+
+procedure TView_Clientes.pesquisarPorLogin(aPesquisa: string);
+begin
+  try
+    begin
+      Service_Conexao.qryUsuarios.DisableControls;
+
+      Service_Conexao.qryUsuarios.Close;
+      Service_Conexao.qryUsuarios.SQL.Clear;
+
+      Service_Conexao.qryUsuarios.SQL.Text := 'select * from USUARIOS where upper(LOGIN) like :pesquisa';
+      Service_Conexao.qryUsuarios.ParamByName('pesquisa').AsString := '%' + UpperCase(aPesquisa) + '%';
+
+      Service_Conexao.qryUsuarios.Open;
+      Service_Conexao.qryUsuarios.EnableControls;
+    end;
+    except
+      on E: exception do
+      raise Exception.CreateFmt('Erro ao pesquisar: %s (SQL: %s)', [E.Message, Service_Conexao.qryUsuarios.SQL.Text]);
+    end;
 end;
 
 procedure TView_Clientes.spdbtnCancelarClick(Sender: TObject);
@@ -169,6 +243,19 @@ begin  //Salvar
     CardPanel_Listas.ActiveCard := card_pesquisa;
     ShowMessage('Dados salvos com sucesso!');
   end;
+end;
+
+function TView_Clientes.validarPesquisa(aPesquisa: string): boolean;
+begin
+  if aPesquisa = '' then
+  begin
+    Result := False;
+    pesquisaDefault;
+    ShowMessage('Insira uma pesquisa válida.');
+  end
+  else
+    Result := True;
+
 end;
 
 end.

@@ -34,8 +34,12 @@ type
     procedure btnEntrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure lblEsqueciSenhaClick(Sender: TObject);
+    procedure edtSenhaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edtUserKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormShow(Sender: TObject);
 
   private
     Tentativas: integer;
@@ -52,6 +56,9 @@ var
 
 implementation
 
+uses
+  ViewPrincipal;
+
 {$R *.dfm}
 
 procedure TView_Login.btnEntrarClick(Sender: TObject);
@@ -63,7 +70,13 @@ begin
   if validarCampos then
   begin
     if Service_Conexao.validarLogin(User, Senha) then
-      ModalResult	:= 1
+    begin
+      ModalResult	:= 1;
+      if not assigned(View_Principal) then
+        Application.CreateForm(TView_Principal, View_Principal);
+      View_Principal.Show;
+      Self.Hide;
+    end
     else
     begin
       Tentativas := Tentativas - 1;
@@ -80,15 +93,31 @@ begin
   Application.Terminate;
 end;
 
-procedure TView_Login.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TView_Login.edtSenhaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
-  Service_Conexao.Free;
+  if Key = VK_RETURN then
+    btnEntrarClick(Sender);
+end;
+
+procedure TView_Login.edtUserKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_RETURN then
+    edtSenha.SetFocus;
 end;
 
 procedure TView_Login.FormCreate(Sender: TObject);
 begin
-  Tentativas := 5;
   Service_Conexao := TService_Conexao.Create(Application);
+end;
+
+procedure TView_Login.FormShow(Sender: TObject);
+begin
+  edtUser.Text := '';
+  edtSenha.Text := '';
+  edtUser.SetFocus;
+  Tentativas := 5;
 end;
 
 procedure TView_Login.lblEsqueciSenhaClick(Sender: TObject);
