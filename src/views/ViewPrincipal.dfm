@@ -16,7 +16,6 @@ object View_Principal: TView_Principal
   Visible = True
   OnActivate = FormActivate
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnMouseMove = FormMouseMove
   OnShow = FormShow

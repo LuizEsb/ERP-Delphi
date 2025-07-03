@@ -32,7 +32,6 @@ type
     lblEsqueciSenha: TLabel;
     btnSair: TSpeedButton;
     procedure btnEntrarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnSairClick(Sender: TObject);
     procedure lblEsqueciSenhaClick(Sender: TObject);
     procedure edtSenhaKeyDown(Sender: TObject; var Key: Word;
@@ -105,11 +104,6 @@ procedure TView_Login.edtUserKeyDown(Sender: TObject; var Key: Word;
 begin
   if Key = VK_RETURN then
     edtSenha.SetFocus;
-end;
-
-procedure TView_Login.FormCreate(Sender: TObject);
-begin
-  Service_Conexao := TService_Conexao.Create(Application);
 end;
 
 procedure TView_Login.FormShow(Sender: TObject);

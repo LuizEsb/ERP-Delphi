@@ -24,8 +24,8 @@ uses
   Vcl.StdCtrls,
   Vcl.WinXCtrls,
   Vcl.WinXPanels,
-  ServiceConexao,
-  CriptografiaHelper;
+  CriptografiaHelper,
+  ServiceConexao;
 
 type
   TView_Clientes = class(TForm)
@@ -86,7 +86,6 @@ type
 
 var
   View_Clientes: TView_Clientes;
-  Service_Conexao: TService_Conexao;
 
 implementation
 
@@ -126,20 +125,20 @@ end;
 
 procedure TView_Clientes.FormShow(Sender: TObject);
 begin  //show
-   CardPanel_Listas.ActiveCard := card_pesquisa;
-   pesquisaDefault;
+  pesquisaDefault;
+  CardPanel_Listas.ActiveCard := card_pesquisa;
 end;
 
 procedure TView_Clientes.pesquisaDefault;
 begin
-  Service_Conexao.qryUsuarios.DisableControls;
-   try
-     Service_Conexao.qryUsuarios.Close;
-     Service_Conexao.qryUsuarios.SQL.Text := 'SELECT * FROM usuarios ORDER BY id DESC';
-     Service_Conexao.qryUsuarios.Open;
-   finally
-     Service_Conexao.qryUsuarios.EnableControls;
-   end;
+  ServiceConexao.Service_Conexao.qryUsuarios.DisableControls;
+  try
+    Service_Conexao.qryUsuarios.Close;
+    Service_Conexao.qryUsuarios.SQL.Text := 'SELECT * FROM usuarios ORDER BY id DESC';
+    Service_Conexao.qryUsuarios.Open;
+  finally
+    Service_Conexao.qryUsuarios.EnableControls;
+  end;
 end;
 
 procedure TView_Clientes.pesquisarDados(aPesquisa: string);
@@ -170,7 +169,7 @@ begin
     end;
     except
       on E: exception do
-      raise Exception.CreateFmt('Erro ao pesquisar: %s (SQL: %s)', [E.Message, Service_Conexao.qryUsuarios.SQL.Text]);
+      raise Exception.CreateFmt('Erro ao pesquisar: %s (SQL: %s)', [E.Message, ServiceConexao.Service_Conexao.qryUsuarios.SQL.Text]);
   end;
 end;
 

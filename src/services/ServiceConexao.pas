@@ -26,8 +26,11 @@ uses
   FireDAC.Comp.Client,
   Utils,
   StrUtils,
+  Forms,
   Math,
-  Dialogs, FireDAC.Phys.IBBase, FireDAC.Comp.UI;
+  Dialogs,
+  FireDAC.Phys.IBBase,
+  FireDAC.Comp.UI;
 
 type
   TService_Conexao = class(TDataModule)
@@ -47,6 +50,7 @@ type
     qryLogLoginDATA_HORA_LOGIN: TSQLTimeStampField;
     qryLogLoginSUCESSO: TStringField;
     qryLogLoginREGISTRO_MAC_PC: TStringField;
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +90,44 @@ begin
   except
     on E: exception do
     raise Exception.CreateFmt('Erro ao atualizar registro de login mais recente: %s (SQL: %s)', [E.Message, qryLogin.SQL.Text]);
+  end;
+end;
+
+procedure TService_Conexao.DataModuleCreate(Sender: TObject);
+var
+  DiretorioSistema: string;
+  ArquivoDiretorio: TStringList;
+  ConexaoStr: string;
+begin
+  DiretorioSistema := ExtractFilePath(Application.ExeName);
+  ArquivoDiretorio := TStringList.Create;
+  try
+    ArquivoDiretorio.LoadFromFile(DiretorioSistema + 'Caminho.ini');
+    ConexaoStr := ArquivoDiretorio[0].Trim;
+
+    // verifica se é conexão de rede
+    if (ConexaoStr.Contains(':\')) and  // drive (C:\)
+       (ConexaoStr.IndexOf(':') = ConexaoStr.IndexOf(':\')) then
+    begin
+      // é um caminho local
+      connUsuario.Params.Values['Database'] := ConexaoStr;
+    end
+    else if (ConexaoStr.CountChar(':') = 2) and  // tem dois ":" (IP:porta:path)
+            (ConexaoStr.Contains('/')) then      // tem a barra da porta
+    begin
+      // é conexão de rede (ex: "127.0.0.1/3050:C:\DB\BANCOPROJ.FDB")
+      connUsuario.Params.Values['Server'] := ConexaoStr.Substring(0, ConexaoStr.IndexOf(':'));
+      connUsuario.Params.Values['Database'] := ConexaoStr.Substring(ConexaoStr.LastIndexOf(':') + 1);
+    end
+    else
+    begin
+      ShowMessage('Formato de conexão inválido no arquivo Caminho.ini');
+      raise Exception.Create('Formato de conexão inválido no arquivo Caminho.ini');
+    end;
+
+    connUsuario.Connected := True;
+  finally
+    ArquivoDiretorio.Free;
   end;
 end;
 

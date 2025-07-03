@@ -61,7 +61,6 @@ type
 
 var
   View_Logs: TView_Logs;
-  Service_Conexao: TService_Conexao;
 
 implementation
 
@@ -101,13 +100,13 @@ end;
 procedure TView_Logs.pesquisaDefault;
 begin
   Service_Conexao.qryLogLogin.DisableControls;
-   try
-     Service_Conexao.qryLogLogin.Close;
-     Service_Conexao.qryLogLogin.SQL.Text := 'SELECT * FROM log_login ORDER BY id DESC';
-     Service_Conexao.qryLogLogin.Open;
-   finally
-     Service_Conexao.qryLogLogin.EnableControls;
-   end;
+  try
+    Service_Conexao.qryLogLogin.Close;
+    Service_Conexao.qryLogLogin.SQL.Text := 'SELECT * FROM log_login ORDER BY id DESC';
+    Service_Conexao.qryLogLogin.Open;
+  finally
+    Service_Conexao.qryLogLogin.EnableControls;
+  end;
 end;
 
 procedure TView_Logs.pesquisarDados(aPesquisa: string);

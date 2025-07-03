@@ -78,7 +78,6 @@ type
     procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormActivate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure FormCreate(Sender: TObject);
 
   private
@@ -92,7 +91,6 @@ type
 
 var
   View_Principal: TView_Principal;
-  Service_Conexao: TService_Conexao;
   TempoInativo: integer;
   TempoLimite: integer;
 
@@ -172,11 +170,6 @@ end;
 procedure TView_Principal.FormCreate(Sender: TObject);
 begin
   tmrSessao.Enabled := True;
-end;
-
-procedure TView_Principal.FormDestroy(Sender: TObject);
-begin
-  FreeAndNil(Service_Conexao);
 end;
 
 procedure TView_Principal.FormKeyDown(Sender: TObject; var Key: Word;

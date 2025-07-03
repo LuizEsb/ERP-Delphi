@@ -1,4 +1,5 @@
 object Service_Conexao: TService_Conexao
+  OnCreate = DataModuleCreate
   Height = 480
   Width = 640
   object connUsuario: TFDConnection
@@ -22,10 +23,9 @@ object Service_Conexao: TService_Conexao
     Top = 72
   end
   object qryLogLogin: TFDQuery
-    Active = True
     Connection = connUsuario
     UpdateOptions.AssignedValues = [uvGeneratorName]
-    UpdateOptions.GeneratorName = 'INC_USUARIOSID'
+    UpdateOptions.GeneratorName = 'INC_LOGLOGIN_ID'
     SQL.Strings = (
       'select * from log_login '
       'order by id desc')
@@ -70,6 +70,7 @@ object Service_Conexao: TService_Conexao
     UpdateOptions.KeyFields = 'ID'
     SQL.Strings = (
       'select * from usuarios'
+      'order by id desc'
       '')
     Left = 112
     Top = 72

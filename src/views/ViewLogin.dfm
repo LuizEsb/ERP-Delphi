@@ -10,7 +10,6 @@ object View_Login: TView_Login
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  OnCreate = FormCreate
   OnShow = FormShow
   TextHeight = 15
   object pnlPrincipal: TPanel

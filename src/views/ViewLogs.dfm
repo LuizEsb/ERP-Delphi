@@ -25,8 +25,6 @@ object View_Logs: TView_Logs
     Color = 8750469
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 640
-    ExplicitHeight = 437
     object CardPanel_Listas: TCardPanel
       AlignWithMargins = True
       Left = 1
@@ -43,8 +41,6 @@ object View_Logs: TView_Logs
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 638
-      ExplicitHeight = 437
       object card_pesquisa: TCard
         Left = 0
         Top = 0
@@ -53,8 +49,6 @@ object View_Logs: TView_Logs
         Caption = 'Card1'
         CardIndex = 0
         TabOrder = 0
-        ExplicitWidth = 638
-        ExplicitHeight = 437
         object pnlTituloPesquisa: TPanel
           Left = 0
           Top = 0
@@ -65,7 +59,6 @@ object View_Logs: TView_Logs
           Color = 13224649
           ParentBackground = False
           TabOrder = 0
-          ExplicitTop = -3
           object lblTituloPesquisa: TLabel
             Left = 29
             Top = 14
@@ -187,8 +180,6 @@ object View_Logs: TView_Logs
     Color = 8750469
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 472
-    ExplicitWidth = 640
   end
   object pnlTopo: TPanel
     Left = 0
@@ -200,7 +191,6 @@ object View_Logs: TView_Logs
     Color = 5395026
     ParentBackground = False
     TabOrder = 2
-    ExplicitWidth = 640
     object lblTitulo: TLabel
       AlignWithMargins = True
       Left = 38
@@ -280,7 +270,6 @@ object View_Logs: TView_Logs
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 559
       object btnSair: TSpeedButton
         AlignWithMargins = True
         Left = 3

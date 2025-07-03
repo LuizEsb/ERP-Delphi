@@ -87,8 +87,8 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>install\imgs\ico\iconstu.ico</Icon_MainIcon>
-        <DCC_ExeOutput>C:\Users\User\Desktop\projetoDelphi\install\</DCC_ExeOutput>
-        <DCC_DcuOutput>C:\Users\User\Desktop\projetoDelphi\dcus\</DCC_DcuOutput>
+        <DCC_ExeOutput>C:\Users\User\Desktop\projetoDelphiBackup\projetoDelphi\install\</DCC_ExeOutput>
+        <DCC_DcuOutput>C:\Users\User\Desktop\projetoDelphiBackup\projetoDelphi\dcus\</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
