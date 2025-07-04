@@ -13,6 +13,8 @@ function obterMACAddr: string;
 
 implementation
 
+{$REGION 'Método MAC Address'}
+
 function obterMACAddr: string;
  var
   Locator, Services, Enumerator: OleVariant;
@@ -42,4 +44,7 @@ begin
       Result := 'MAC-UNKNOWN';
   end;
 end;
+
+{$ENDREGION}
+
 end.

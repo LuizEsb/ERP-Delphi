@@ -73,6 +73,26 @@ uses CriptografiaHelper;
 
 { TDataModule1 }
 
+{$REGION 'Métodos Logs'}
+
+procedure TService_Conexao.registrarLogLogin(IDUsuario: integer; Sucesso: boolean);
+begin
+  if not connUsuario.Connected then
+    connUsuario.Connected := True;
+
+  qryLogLogin.Close;
+  qryLogLogin.SQL.Clear;
+
+  qryLogLogin.SQL.Text := 'insert into LOG_LOGIN (ID_USUARIO, DATA_HORA_LOGIN, SUCESSO, REGISTRO_MAC_PC) ' +
+  'VALUES (:id_usuario, CURRENT_TIMESTAMP, :sucesso, :registro_mac_pc)';
+
+  qryLogLogin.ParamByName('id_usuario').AsInteger := IDUsuario;
+  qryLogLogin.ParamByName('sucesso').AsString := IfThen(Sucesso, 'SIM', 'NAO');
+  qryLogLogin.ParamByName('registro_mac_pc').AsString := ObterMACAddr;
+
+  qryLogLogin.ExecSQL;
+end;
+
 procedure TService_Conexao.atualizaUltimoLog(idUsuario: integer);
 begin
   if not connUsuario.Connected then
@@ -92,6 +112,10 @@ begin
     raise Exception.CreateFmt('Erro ao atualizar registro de login mais recente: %s (SQL: %s)', [E.Message, qryLogin.SQL.Text]);
   end;
 end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos DataModule/ConexãoDB'}
 
 procedure TService_Conexao.DataModuleCreate(Sender: TObject);
 var
@@ -131,23 +155,9 @@ begin
   end;
 end;
 
-procedure TService_Conexao.registrarLogLogin(IDUsuario: integer; Sucesso: boolean);
-begin
-  if not connUsuario.Connected then
-    connUsuario.Connected := True;
+{$ENDREGION}
 
-  qryLogLogin.Close;
-  qryLogLogin.SQL.Clear;
-
-  qryLogLogin.SQL.Text := 'insert into LOG_LOGIN (ID_USUARIO, DATA_HORA_LOGIN, SUCESSO, REGISTRO_MAC_PC) ' +
-  'VALUES (:id_usuario, CURRENT_TIMESTAMP, :sucesso, :registro_mac_pc)';
-
-  qryLogLogin.ParamByName('id_usuario').AsInteger := IDUsuario;
-  qryLogLogin.ParamByName('sucesso').AsString := IfThen(Sucesso, 'SIM', 'NAO');
-  qryLogLogin.ParamByName('registro_mac_pc').AsString := ObterMACAddr;
-
-  qryLogLogin.ExecSQL;
-end;
+{$REGION 'Métodos Login'}
 
 function TService_Conexao.validarLogin(ALogin, ASenha : string) : boolean;
 var
@@ -195,5 +205,7 @@ begin
 
   registrarLogLogin(IDUsuario, Result);
 end;
+
+{$ENDREGION}
 
 end.

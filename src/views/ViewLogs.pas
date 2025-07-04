@@ -66,23 +66,22 @@ implementation
 
 {$R *.dfm}
 
+{$REGION 'Métodos Botões'}
+
 procedure TView_Logs.btnSairClick(Sender: TObject);
 begin
   Self.Close;
 end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos Teclas(Key)'}
 
 procedure TView_Logs.edtPesquisaKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if Key = VK_RETURN then
     pesquisarDados(Trim(edtPesquisa.Text))
-end;
-
-procedure TView_Logs.FormCreate(Sender: TObject);
-begin
-  BorderStyle := bsNone;
-  Align := alClient;
-  ParentBackground := False;
 end;
 
 procedure TView_Logs.FormKeyDown(Sender: TObject; var Key: Word;
@@ -92,10 +91,25 @@ begin
   Self.Close;
 end;
 
+{$ENDREGION}
+
+{$REGION 'Métodos Formulário'}
+
+procedure TView_Logs.FormCreate(Sender: TObject);
+begin
+  BorderStyle := bsNone;
+  Align := alClient;
+  ParentBackground := False;
+end;
+
 procedure TView_Logs.FormShow(Sender: TObject);
 begin
   pesquisaDefault;
 end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos Pesquisa(SQL/Queries)'}
 
 procedure TView_Logs.pesquisaDefault;
 begin
@@ -162,6 +176,10 @@ begin
   end;
 end;
 
+{$ENDREGION}
+
+{$REGION 'Métodos Validação'}
+
 function TView_Logs.validarPesquisa(aPesquisa: string): boolean;
 begin
   if aPesquisa = '' then
@@ -173,5 +191,7 @@ begin
   else
     Result := True;
 end;
+
+{$ENDREGION}
 
 end.

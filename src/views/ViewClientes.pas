@@ -91,29 +91,13 @@ implementation
 
 {$R *.dfm}
 
-
-procedure TView_Clientes.btnSairClick(Sender: TObject);
-begin
-  if MessageDlg('Deseja fechar a aba Clientes?' + sLineBreak + 'Todas as alterações não salvas serão descartadas.', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-    begin
-      Self.Close;
-    end;
-end;
+{$REGION 'Métodos Formulário/Componentes'}
 
 procedure TView_Clientes.CardPanel_ListasCardChange(Sender: TObject; PrevCard,
   NextCard: TCard);
 begin
   if CardPanel_Listas.ActiveCard = card_cadastro then
     SelectFirst;
-end;
-
-procedure TView_Clientes.edtPesquisaKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  if Key = VK_RETURN then
-  begin
-    pesquisarDados(Trim(edtPesquisa.Text));
-  end;
 end;
 
 procedure TView_Clientes.FormCreate(Sender: TObject);
@@ -128,6 +112,86 @@ begin  //show
   pesquisaDefault;
   CardPanel_Listas.ActiveCard := card_pesquisa;
 end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos Teclas(Key)'}
+
+ procedure TView_Clientes.edtPesquisaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_RETURN then
+  begin
+    pesquisarDados(Trim(edtPesquisa.Text));
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos Botões'}
+
+procedure TView_Clientes.btnSairClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja fechar a aba Clientes?' + sLineBreak + 'Todas as alterações não salvas serão descartadas.', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      Self.Close;
+    end;
+end;
+
+procedure TView_Clientes.spdbtnCancelarClick(Sender: TObject);
+begin  //Cancelar
+  if Service_Conexao.qryUsuarios.State in dsEditModes then
+  Service_Conexao.qryUsuarios.Cancel;
+  CardPanel_Listas.ActiveCard := card_pesquisa;
+end;
+
+procedure TView_Clientes.spdbtnEditarClick(Sender: TObject);
+begin  //Editar
+  CardPanel_Listas.ActiveCard := card_cadastro;
+  Service_Conexao.qryUsuarios.Edit;
+  edtSenha.Text := '';
+end;
+
+procedure TView_Clientes.spdbtnExcluirClick(Sender: TObject);
+begin  //Excluir
+  if not Service_Conexao.qryUsuarios.IsEmpty then
+  begin
+    if MessageDlg('Deseja realmente excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      Service_Conexao.qryUsuarios.Delete;
+      ShowMessage('Cliente excluído com sucesso!');
+      CardPanel_Listas.ActiveCard := card_pesquisa;
+    end;
+  end
+  else
+  ShowMessage('Nenhum registro selecionado para exclusão.');
+end;
+
+procedure TView_Clientes.spdbtnNovoClick(Sender: TObject);
+begin  //Novo
+  if dsDados.DataSet.State in dsEditModes then
+    Service_Conexao.qryUsuarios.Cancel;
+
+  CardPanel_Listas.ActiveCard := card_cadastro;
+  Service_Conexao.qryUsuarios.Insert;
+
+  if dsDados.DataSet.State in [dsInsert] then
+    edtID.Text := '';
+end;
+
+procedure TView_Clientes.spdbtnSalvarClick(Sender: TObject);
+begin  //Salvar
+  if dsDados.DataSet.State in dsEditModes then
+  begin
+    Service_Conexao.qryUsuariosSENHA.AsString := TCriptografiaHelper.gerarHashSHA256(edtSenha.Text);
+    Service_Conexao.qryUsuarios.Post;
+    CardPanel_Listas.ActiveCard := card_pesquisa;
+    ShowMessage('Dados salvos com sucesso!');
+  end;
+end;
+{$ENDREGION}
+
+{$REGION 'Métodos Pesquisa(SQL/Queries)'}
 
 procedure TView_Clientes.pesquisaDefault;
 begin
@@ -194,55 +258,9 @@ begin
     end;
 end;
 
-procedure TView_Clientes.spdbtnCancelarClick(Sender: TObject);
-begin  //Cancelar
-  if Service_Conexao.qryUsuarios.State in dsEditModes then
-  Service_Conexao.qryUsuarios.Cancel;
-  CardPanel_Listas.ActiveCard := card_pesquisa;
-end;
+{$ENDREGION}
 
-procedure TView_Clientes.spdbtnEditarClick(Sender: TObject);
-begin  //Editar
-  CardPanel_Listas.ActiveCard := card_cadastro;
-  Service_Conexao.qryUsuarios.Edit;
-  edtSenha.Text := '';
-end;
-
-procedure TView_Clientes.spdbtnExcluirClick(Sender: TObject);
-begin  //Excluir
-  if not Service_Conexao.qryUsuarios.IsEmpty then
-  begin
-    if MessageDlg('Deseja realmente excluir este registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-    begin
-      Service_Conexao.qryUsuarios.Delete;
-      ShowMessage('Cliente excluído com sucesso!');
-      CardPanel_Listas.ActiveCard := card_pesquisa;
-    end;
-  end
-  else
-  ShowMessage('Nenhum registro selecionado para exclusão.');
-end;
-
-procedure TView_Clientes.spdbtnNovoClick(Sender: TObject);
-begin  //Novo
-  if dsDados.DataSet.State in dsEditModes then
-  Service_Conexao.qryUsuarios.Cancel;
-  CardPanel_Listas.ActiveCard := card_cadastro;
-  Service_Conexao.qryUsuarios.Insert;
-  if dsDados.DataSet.State in [dsInsert] then
-  edtID.Text := '';
-end;
-
-procedure TView_Clientes.spdbtnSalvarClick(Sender: TObject);
-begin  //Salvar
-  if dsDados.DataSet.State in dsEditModes then
-  begin
-    Service_Conexao.qryUsuariosSENHA.AsString := TCriptografiaHelper.gerarHashSHA256(edtSenha.Text);
-    Service_Conexao.qryUsuarios.Post;
-    CardPanel_Listas.ActiveCard := card_pesquisa;
-    ShowMessage('Dados salvos com sucesso!');
-  end;
-end;
+{$REGION 'Métodos Validação'}
 
 function TView_Clientes.validarPesquisa(aPesquisa: string): boolean;
 begin
@@ -254,7 +272,8 @@ begin
   end
   else
     Result := True;
-
 end;
+
+{$ENDREGION}
 
 end.

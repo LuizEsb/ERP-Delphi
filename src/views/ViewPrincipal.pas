@@ -100,6 +100,8 @@ uses
 
 {$R *.dfm}
 
+{$REGION 'Métodos Botões'}
+
 procedure TView_Principal.btnCaixaClick(Sender: TObject);
 begin
   GET_ShapeMENU(Sender);
@@ -109,33 +111,6 @@ procedure TView_Principal.btnUsuariosClick(Sender: TObject);
 begin
   GET_ShapeMENU(Sender);
   CriarViewClientes;
-end;
-
-procedure TView_Principal.CriarViewClientes;
-begin
-  if not Assigned(View_Clientes) then
-    Application.CreateForm(TView_Clientes, View_Clientes);
-
-  View_Clientes.BorderStyle := bsNone;
-  View_Clientes.Align := alClient;
-  View_Clientes.Parent := pnlConteudo;
-  View_Clientes.Visible := True;
-  View_Clientes.BringToFront;
-  View_Clientes.SetFocus;
-
-end;
-
-procedure TView_Principal.CriarViewLogs;
-begin
-  if not Assigned(View_Logs) then
-    Application.CreateForm(TView_Logs, View_Logs);
-
-  View_Logs.BorderStyle := bsNone;
-  View_Logs.Align := alClient;
-  View_Logs.Parent := pnlConteudo;
-  View_Logs.Visible := True;
-  View_Logs.BringToFront;
-  View_Logs.SetFocus;
 end;
 
 procedure TView_Principal.btnLogsClick(Sender: TObject);
@@ -162,6 +137,40 @@ begin
     end;
 end;
 
+{$ENDREGION}
+
+{$REGION 'Métodos CriarView'}
+
+procedure TView_Principal.CriarViewClientes;
+begin
+  if not Assigned(View_Clientes) then
+    Application.CreateForm(TView_Clientes, View_Clientes);
+
+  View_Clientes.BorderStyle := bsNone;
+  View_Clientes.Align := alClient;
+  View_Clientes.Parent := pnlConteudo;
+  View_Clientes.Visible := True;
+  View_Clientes.BringToFront;
+  View_Clientes.SetFocus;
+end;
+
+procedure TView_Principal.CriarViewLogs;
+begin
+  if not Assigned(View_Logs) then
+    Application.CreateForm(TView_Logs, View_Logs);
+
+  View_Logs.BorderStyle := bsNone;
+  View_Logs.Align := alClient;
+  View_Logs.Parent := pnlConteudo;
+  View_Logs.Visible := True;
+  View_Logs.BringToFront;
+  View_Logs.SetFocus;
+end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos Formulário/Componentes'}
+
 procedure TView_Principal.FormActivate(Sender: TObject);
 begin
   TempoInativo := 0;
@@ -170,12 +179,6 @@ end;
 procedure TView_Principal.FormCreate(Sender: TObject);
 begin
   tmrSessao.Enabled := True;
-end;
-
-procedure TView_Principal.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  TempoInativo := 0;
 end;
 
 procedure TView_Principal.FormMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -234,5 +237,17 @@ begin
     Application.Terminate;
   end;
 end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos Teclas(Key)'}
+
+procedure TView_Principal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  TempoInativo := 0;
+end;
+
+{$ENDREGION}
 
 end.

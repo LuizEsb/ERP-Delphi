@@ -46,9 +46,10 @@ type
     function validarSenha(ASenha : string) : boolean;
     function validarCampos : boolean;
     procedure maxTentativas;
+
   public
 
-  end;
+end;
 
 var
   View_Login: TView_Login;
@@ -59,6 +60,8 @@ uses
   ViewPrincipal;
 
 {$R *.dfm}
+
+{$REGION 'Métodos Botões'}
 
 procedure TView_Login.btnEntrarClick(Sender: TObject);
 var
@@ -92,6 +95,18 @@ begin
   Application.Terminate;
 end;
 
+procedure TView_Login.lblEsqueciSenhaClick(Sender: TObject);
+begin
+  if MessageDlg('Deseja alterar sua senha?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    //
+  end;
+end;
+
+{$ENDREGION}
+
+{$REGION 'Métodos Teclas(Key)'}
+
 procedure TView_Login.edtSenhaKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -106,6 +121,10 @@ begin
     edtSenha.SetFocus;
 end;
 
+{$ENDREGION}
+
+{$REGION 'Métodos Formulário'}
+
 procedure TView_Login.FormShow(Sender: TObject);
 begin
   edtUser.Text := '';
@@ -114,14 +133,12 @@ begin
   Tentativas := 5;
 end;
 
-procedure TView_Login.lblEsqueciSenhaClick(Sender: TObject);
-begin
-  if MessageDlg('Deseja alterar sua senha?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
-    //
-  end;
-end;
+{$ENDREGION}
+
+{$REGION 'Métodos Validação'}
+
 procedure TView_Login.maxTentativas;
+
 begin
   if Tentativas = 0 then
   begin
@@ -158,5 +175,7 @@ begin
     Result := False;
     end;
 end;
+
+{$ENDREGION}
 
 end.

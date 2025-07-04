@@ -21,8 +21,6 @@ begin
     if View_Login.ShowModal = 1 then
     begin
       Application.CreateForm(TView_Principal, View_Principal);
-      Application.CreateForm(TView_Clientes, View_Clientes);
-      Application.CreateForm(TView_Logs, View_Logs);
       Application.Run;
     end;
   finally
